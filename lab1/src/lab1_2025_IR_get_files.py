@@ -1,13 +1,14 @@
 import os
 import nltk
 from nltk.corpus import reuters
-nltk.download('reuters')  # TODO: Uncomment if needed
+# nltk.download('reuters')  # TODO: Uncomment if needed
 
 from pathlib import Path
 
 def main():
-    os.makedirs('../reuters/test', exist_ok=True)  # This creates a directory unless you already have one.
-    os.makedirs('../reuters/training', exist_ok=True)
+    os.makedirs('../reuters', exist_ok=True)  # This creates a directory unless you already have one.
+    os.makedirs('../reuters_small', exist_ok=True)  # This creates a directory unless you already have one.
+    
     # Make sure the path is correct (i.e., is in accordance with the structure of directories and files under Section 8 
     #in the lab instructions
     out_path = Path('../reuters')
@@ -24,7 +25,10 @@ def main():
 
     for file in file_list:
         raw_text = reuters.raw(file)
-        out_file = out_path / f'{file}.txt'
+
+        file_name = file.split('/')[1]
+
+        out_file = out_path / f'{file_name}.txt'
         with out_file.open('w', encoding='utf-8') as f:
             f.write(raw_text)
         
